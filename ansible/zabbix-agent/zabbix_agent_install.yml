@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+- name: Install Zabbix Agent on Ubuntu
+  apt: 
+      name=zabbix-agent
+      state=latest
+
+- name: Stop service zabbix-agent
+  become: yes
+  service:
+      name: zabbix-agent
+      state: stopped
+
+- name: Remove zabbix config file
+  become: yes
+  file:
+    path: /etc/zabbix/zabbix_agentd.conf
+    state: absent
+
+- name: Create new zabbix config file from template
+  become: yes
+  template:
+    src: "/etc/ansible/zabbix-agent/templates/zabbix_agentd.conf.j2"
+    dest: "/etc/zabbix/zabbix_agentd.conf"
+  handlers:
+
+- name: zabbix-agent systemd
+  systemd:
+  name: zabbix-agent.service
+  enabled: yes
+  state: started
