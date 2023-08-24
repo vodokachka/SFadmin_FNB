@@ -1,0 +1,9 @@
+hosts
+/ansible-all/backup/*
+/ansible-all/common/*
+/anible-all/zabbix-agent/hosts
+/ansible-all/hosts
+/ansible-all/ansible.cfg
+.pub
+
+
