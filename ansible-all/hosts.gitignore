@@ -1,7 +1,0 @@
-hosts
-#ignoring hosts file
-
-/backup/*
-/common/*
-
-
